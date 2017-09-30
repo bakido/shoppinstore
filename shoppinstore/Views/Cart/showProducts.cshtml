@@ -1,0 +1,54 @@
+﻿@model IEnumerable<shoppinstore.Models.Product>
+
+@{
+    ViewBag.Title = "showProducts";
+}
+
+<h2>Products in store</h2>
+@Html.ActionLink("Display Cart items", "ShowCartItems")
+
+<table class="table table-responsive">
+    <tr>
+        <th>
+           Product Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            price
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+           Date added
+        </th>
+        <th>Do some shopping</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAdded)
+        </td>
+        <td>
+            @Html.ActionLink("Add Item to cart", "AddItemsToShoppingCart", new { id=item.ProductId })           
+        </td>
+
+    </tr>
+}
+
+</table>

@@ -1,0 +1,59 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@model shoppinstore.Models.productViewmodel
+
+@*@{
+    ViewBag.Title = "DisplayAllProductsInStore";
+}*@
+
+
+<h2>Admin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddNewProductToTheStore")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Product name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pageDlist.First().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pageDlist.First().price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pageDlist.First().Category)
+        </th>
+        <th>Last date modified</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.pageDlist) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAdded)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Edit", "EditProductInformation", new { id=item.ProductId }) |
+      
+            @Html.ActionLink("Delete", "RemoveProductFromStock", new { id=item.ProductId })
+        </td>
+    </tr>
+}
+</table>
+@Html.PagedListPager(Model.pageDlist,page=>Url.Action("DisplayAllProductsInStore",new { page}))

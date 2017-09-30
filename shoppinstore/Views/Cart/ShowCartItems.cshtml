@@ -1,0 +1,62 @@
+﻿@model IEnumerable<shoppinstore.Persistence.CartItems>
+
+@{
+    ViewBag.Title = "ShowCartItems";
+}
+<h2>Items in cart</h2>
+
+@ViewBag.Message
+<br>
+<p>Total cost of items is R @ViewBag.Cost</p>
+@Html.ActionLink("Continue Shopping", "showProducts")
+<table class="table">
+    <tr>
+        <th>
+          Product name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.DateAdded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.DateAdded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Reduce quantity", "RemoveProductFromList", new { id=item.product.ProductId })             
+        </td>
+    </tr>
+}
+
+</table>
+@Html.ActionLink("Check out", "RequestShippingDetails")
